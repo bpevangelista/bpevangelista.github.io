@@ -33,7 +33,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
   width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:15px}
 
 /* hero */
-.hero{display:grid;grid-template-columns:160px 1fr;gap:34px;align-items:center;padding:50px 0 8px}
+.hero{display:grid;grid-template-columns:160px 1fr;gap:34px;align-items:center;padding:30px 0 8px}
 .photo{width:160px;height:160px;border-radius:50%;object-fit:cover;box-shadow:0 8px 30px rgba(0,0,0,.18);
   border:3px solid var(--card)}
 .hero h1{font-size:38px;font-weight:600;margin:0 0 4px;letter-spacing:.2px}
@@ -44,6 +44,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .social svg{width:22px;height:22px;fill:currentColor;display:block}
 
 .h{font-size:22px;font-weight:600;margin:44px 0 14px;display:flex;align-items:baseline;gap:12px}
+#blog{margin-top:28px}
 .h .all{font-size:13px;font-weight:500;color:var(--muted)}
 .sub{color:var(--muted);margin:-6px 0 16px;font-size:15px}
 
