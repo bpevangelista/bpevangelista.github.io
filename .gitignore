@@ -1,0 +1,8 @@
+# Drafts — never committed, so never deployed / crawlable
+blog/_drafts/
+
+# macOS
+.DS_Store
+
+# local tooling
+.claude/
