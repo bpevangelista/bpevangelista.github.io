@@ -3,27 +3,35 @@
 # Search + general crawlers
 User-agent: *
 Allow: /
+Disallow: /s/
 
 # AI crawlers — explicitly allowed so the site can be read and cited
 User-agent: GPTBot
 Allow: /
+Disallow: /s/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /s/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /s/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /s/
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /s/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /s/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /s/
 
 Sitemap: https://brunoevangelista.com/sitemap.xml
