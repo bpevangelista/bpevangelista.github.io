@@ -14,49 +14,7 @@
   window.playVid=function(id,t){ if(!id) return; var u='https://www.youtube.com/watch?v='+id; if(t) u+='&t='+t; window.open(u,'_blank','noopener'); };
   window.playThumb=function(el){ var row=el.closest('.prow'); if(row) playVid(row.getAttribute('data-vid')); };
 
-  // blog cards: title+blurb from each post's <head>; posts.js = order + fallbacks
-  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
-  function published(){ return (window.POSTS||[]).filter(function(p){return p.published;}); }
-
-  function metaFromPost(html){
-    var doc=new DOMParser().parseFromString(html,'text/html');
-    var og=doc.querySelector('meta[property="og:title"]');
-    var t=doc.querySelector('title');
-    var title=(og&&og.getAttribute('content'))||(t&&t.textContent.replace(/\s*·\s*Bruno Evangelista\s*$/,''))||'';
-    var md=doc.querySelector('meta[name="description"]');
-    return { title:title.trim(), excerpt:((md&&md.getAttribute('content'))||'').trim() };
-  }
-
-  function renderPosts(){
-    // base: '' at root, '../' inside /blog/
-    document.querySelectorAll('[data-posts]').forEach(function(el){
-      var mode=el.getAttribute('data-posts');           // 'latest' (table) or 'list' (articles)
-      var base=el.getAttribute('data-base')||'';
-      var limit=parseInt(el.getAttribute('data-limit'),10)||Infinity;
-      var posts=published().slice(0,limit);
-      Promise.all(posts.map(function(p){
-        var url=base+'blog/'+p.slug+'.html';
-        return fetch(url).then(function(r){ return r.ok?r.text():''; }).then(function(html){
-          var m=html?metaFromPost(html):{};
-          return { slug:p.slug, date:p.date, title:(m.title||p.title), excerpt:(m.excerpt||p.excerpt) };
-        }).catch(function(){ return { slug:p.slug, date:p.date, title:p.title, excerpt:p.excerpt }; });
-      })).then(function(items){
-        var html='';
-        if(mode==='latest'){
-          items.forEach(function(p){
-            html+='<tr><td class="d">'+esc(p.date)+'</td><td><a href="'+base+'blog/'+p.slug+'.html">'+esc(p.title)+
-                  '</a><span class="ex">'+esc(p.excerpt)+'</span></td></tr>';
-          });
-        }else{
-          items.forEach(function(p){
-            html+='<article class="fpost"><h3 class="pt"><a href="'+base+'blog/'+p.slug+'.html">'+esc(p.title)+
-                  '</a></h3><span class="date">'+esc(p.date)+'</span><p>'+esc(p.excerpt)+'</p></article>';
-          });
-        }
-        el.innerHTML=html;
-      });
-    });
-  }
+  // post lists on index.html/blog.html are static HTML, baked by Draft Studio on publish
 
   // draft guard: unpublished posts show a banner, drop from index
   function draftGuard(){
@@ -69,5 +27,5 @@
     art.insertBefore(b, art.firstChild);
   }
 
-  document.addEventListener('DOMContentLoaded',function(){ renderPosts(); draftGuard(); });
+  document.addEventListener('DOMContentLoaded',draftGuard);
 })();

@@ -176,9 +176,20 @@ article:not(.fpost) li>ul{list-style:circle;margin:.35rem 0 .55rem 1.2rem;color:
 article:not(.fpost) blockquote{margin:2px 0 15px;padding:2px 0 2px 15px;
   border-left:3px solid var(--accent);font-style:italic}
 article:not(.fpost) blockquote p{margin:0 0 8px}article:not(.fpost) blockquote p:last-child{margin:0}
+/* more legible italics — open up the old-style serif italic a touch (weight 500 is a no-op
+   unless the font has a medium face, so it never faux-bolds) */
+article:not(.fpost) em,article:not(.fpost) i,article:not(.fpost) blockquote{letter-spacing:.015em;font-weight:500}
 article:not(.fpost) hr{border:0;border-top:1px solid var(--rule);margin:1.9rem 0}
 article code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88em;background:var(--soft);
   border:1px solid var(--rule);border-radius:5px;padding:1px 5px}
+/* multi-line code block — one box, preserves whitespace, scrolls long lines sideways */
+article:not(.fpost) pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85em;line-height:1.55;
+  background:var(--soft);border:1px solid var(--rule);border-radius:9px;padding:13px 15px;margin:1.4rem 0;
+  overflow-x:auto;white-space:pre;tab-size:2;-moz-tab-size:2}
+/* a <code> inside a <pre> must not inherit the inline-code pill (no border/pad/bg) */
+article:not(.fpost) pre code{font-family:inherit;font-size:inherit;background:none;border:0;padding:0;border-radius:0}
+/* embedded images (e.g. pasted screenshots) — responsive, never overflow the column */
+article:not(.fpost) img{display:block;max-width:100%;height:auto;border-radius:9px;margin:1.4rem 0}
 .draft{background:color-mix(in srgb,var(--accent) 10%,transparent);border:1px solid var(--accent);
   color:var(--accent);border-radius:8px;padding:8px 12px;font-size:13px;font-weight:600;margin:20px 0 0}
 
