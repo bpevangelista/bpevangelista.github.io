@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valuemaxxing with Agents (1/N) How I 10x My Coding &amp; Research Output · Bruno Evangelista</title>
+<meta name="description" content="How to scale yourself 10× with agentic coding – using parallel agents, memory, skills, always-on persistent loops, and agentic workflows">
+<link rel="canonical" href="https://brunoevangelista.com/blog/scaling-yourself-10x-with-agentic-workflows-1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Valuemaxxing with Agents (1/N) How I 10x My Coding &amp; Research Output">
+<meta property="og:description" content="How to scale yourself 10× with agentic coding – using parallel agents, memory, skills, always-on persistent loops, and agentic workflows">
+<link rel="stylesheet" href="../assets/style.css">
+<script src="../assets/main.js"></script>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="3ef458aa-113f-47d3-bb09-c4c6478a082a"></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","headline":"Valuemaxxing with Agents (1/N) How I 10x My Coding & Research Output","datePublished":"2026-07-19","author":{"@type":"Person","name":"Bruno Evangelista"}}
+</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Bruno Evangelista</a>
+    <div class="links">
+      <a href="../blog.html">Blog</a>
+      <button id="tg" class="tg" onclick="toggleTheme()" aria-label="Toggle dark mode">☾</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+  <article>
+    <h1>Valuemaxxing with Agents (1/N)<br>How I 10x My Coding &amp; Research Output</h1>
+    <span class="date">19 Jul 2026</span>
+    <p class="lede"><span style="color: inherit;">A few months ago I could barely get an agent to kick off my training runs. Three months later – agents launch all my runs, babysit them 24/7, fix issues, and ping me only when something needs my attention.</span></p><p class="lede">That is the kind of scaling – valuemaxxing – this series is about. Amazon rebuilt its Bedrock inference engine, an estimated <b>one-year job for 40 engineers – done in 76 days</b> by one Distinguished and five Principals. And Bun, Claude Code's JS runtime, <b>went from Zig to Rust in 11 days</b>, shrinking its binary and bugs. What made both possible? Agentic "workflows" and "loops" – which I'll cover in this series.</p><p class="lede"><span style="color: inherit;">So, how do I build on agentic flows to scale my productivity? Proxy metrics aren’t perfect, but think scaling PRs, dataset generation or training runs. Let's start with:</span></p><blockquote><p>How could you scale yourself 50×?</p></blockquote>
+
+    <p>That's a good question because the answer points to the core issue – it's only possible if <b>you are not the bottleneck</b>. In your day-to-day, <b>do you:</b></p><ul><li><b>Queue many short tasks?</b> Or let agents chase long-horizon goals? <code>/goal</code></li><li><b>Trigger all flows?</b> Or respond to and unblock always-on pipelines? <code>/loop</code><ul><li>Think always-on workflows: agentic eval and training loops, continuous CI/CD pipelines, LMP-generated PRs and datasets, and SPOs searching best solutions.</li></ul><ul><li>Are your agents proactive, watching for and creating new threads/tasks?</li></ul></li><li><b>Unblock every agent?</b>&nbsp;Or auto-accept changes and trust agents to unblock other agents for a slice of the work?<ul><li><b>Review every PR?</b> Or let adversarial agents review and test lower-risk work?</li></ul></li><li><b>Orchestrate manually?</b> Or let agents drive workflows? <code>/workflow</code></li></ul><p>Finally, do you let your money – sorry, your <em>agents</em>&nbsp;– work for you while you sleep?</p>
+
+
+    <h2>Tools for the job: harnesses and models</h2>
+    <p><img src="../assets/blog/four-stages-agentic-coding/img-49705cba.png" alt="" class=""></p><p>My suggestions: prefer a GUI? <code>Codex.app w/ GPT 5.6</code>. Prefer terminal?
+    <code>tmux &amp; Claude w/ Opus 4.8</code>. Free? <code>Hermes w/ Owl-alpha</code> or <code>Qwen 3.5 self-host</code>.</p>
+    <ul>
+    <li><b>Local-host:</b> Qwen 3.5-4B, Gemma 4-E4B. <b>Free API</b>, owl-alpha (~20 tok/s)</li>
+    <li><b>&nbsp;&nbsp;&nbsp;&nbsp;$:</b> DeepSeek V4 Flash, Gemini 3.5 Flash or Muse Spark 1.1</li>
+    <li><b>$$$:</b> GPT 5.6, Opus 4.8, Fable 5</li>
+    </ul>
+
+    <p>Codex / Claude subscriptions offer high ROI. Alternatively,&nbsp;<a href="https://openrouter.ai/">OpenRouter</a>&nbsp;puts many models behind one API, letting you pick your agent. You can run Codex or Claude Code with a cheaper or even free* model endpoint. Or pick Hermes, a strong agent with self-improving loops that periodically refine its memory and skills as you use it, though it takes more work to set up.</p><p>And if latency matters, OpenAI, Anthropic, and OpenRouter offer ways to trade cost for faster reply/inference. Now, let’s walk through the stages of agentic work toward higher productivity: single agents, many agents, automated loops, and finally workflows, LMPs, and SPO.</p>
+
+    <h2>Tasker<span class="speed">~2× output</span></h2><blockquote><p>Fix this. Explain this. Write small features. Write unit tests.</p></blockquote><p><b>Tasker</b>&nbsp;– Many start here. You treat your agent like an intern – handing it scoped tasks and checking in periodically. <b>Bottleneck</b>: trusting results and your time to delegate and verify. A common question:</p><p><i>"How can I make it code like me?" –&nbsp;</i><b>AGENTS.md</b></p><p>Two layers: <code>~/.codex/AGENTS.md</code> or <code>~/.claude/CLAUDE.md</code>&nbsp;for your personal style and rules; <code>&lt;repo&gt;/AGENTS.md</code>&nbsp;for repo-wide rules, with additional <code>AGENTS.md</code> in subfolders for narrower scopes. For example, below is my GPT-5.6 personalization:</p><pre><span style="font-size: 14.45px;"># ALL
+- ALWAYS talk concisely, short final answers
+- NEVER use fillers, pleasantries or narration
+- ALWAYS run tools first with "/bin/zsh -lic"
+
+# CODING<br>- ALWAYS prefer a high-quality but simple solution
+- ALWAYS value lines removed higher than lines added; reason how to<br>write less code and prefer surgical changes
+- AVOID excessive defensive coding
+<br># VERIFY<br>- ALWAYS reproduce the issue first, then test and verify a fix <br>before claiming it's done or fixed<br></span></pre><p style="">Think broad to specific: personal preferences globally, repo conventions at the root, local rules beside the code they govern. They are all concatenated and placed at the start of each session’s context. More recent instructions, including local rules and direct prompts, tend to weight more due to recency.&nbsp;<b>Keep it clean – less is more, and every added rule dilutes the rest</b>. Revisit it as models evolve – e.g., GPT-5.6 needs less guidance than GPT-5.4 due to stronger instruction following.</p><p style="font-family: &quot;Iowan Old Style BT&quot;, &quot;Iowan Old Style&quot;, &quot;Palatino Linotype&quot;, Palatino, Georgia, serif;">Overnight hack? Queue 20 tasks and go to bed. With this playbook working, the natural next step is scaling it up.</p><h2 style="font-family: &quot;Iowan Old Style BT&quot;, &quot;Iowan Old Style&quot;, &quot;Palatino Linotype&quot;, Palatino, Georgia, serif;"><span style="font-size: 1.45rem;">Multi-Tasker </span><span class="speed">4~5× output</span></h2><p><b>Multi-Tasker </b>– Run the same playbook across many agent terminals. <b>Bottleneck:</b> your attention and context switching. This is where Skills and Memory&nbsp;offer high ROI: they&nbsp;<b>improve correctness (producing the results you expect) and efficiency (less trial and error)</b>&nbsp;while reducing the time you spend prompting and checking.</p><p><i>“Why does every session feel like a blank canvas? Can it remember and improve from our past interactions?</i><i>”</i><i>&nbsp;–&nbsp;<b>MEMORY.md</b></i></p><p><b>What are memories?</b>&nbsp;A lightweight retrieval system. Similar to&nbsp;<code>AGENTS.md</code>, the contents of&nbsp;<code>MEMORY.md</code>&nbsp;are added at the start of each agent session. It’s a compact index of the most relevant things the agent has learned across sessions – each line describes one memory and links to its detailed file. As you work, the agent can read whichever memories seem relevant, keeping context small.</p><pre># Memory index<br><span style="font-size: 14.45px;"><br></span>- [Title](file.md) — hook<br>- [Keep it simple](keep-it-simple.md) — Reject defensive machinery; smallest direct change only<span style="font-size: 14.45px;"><br>- [Testing conventions](testing-conventions.md) — Use real databases in integration tests<br>- [Writing style](writing-style.md) — Prefer short paragraphs and concrete examples</span></pre><p>As memories grow, relevance shifts, related entries emerge, and recall becomes increasingly lossy.&nbsp;<b>Can agents dream?</b> To manage this, agents may “dream” – deleting stale memories, merging related ones into richer entries, and making room for new learnings. Dreaming can be periodic (e.g. nightly), event-driven (e.g. after N sessions), or on demand. Memory keeps context but what about repeatable work?</p><p><i>“Can I teach it once, then have it repeat the task exactly as I want?” –&nbsp;</i><b>SKILL.md</b></p><p>Yes, with Skills! The simplest way to create one: work through a task once, trial and error included, then ask the agent: “Review what worked, what failed, and turn it into a reusable skill.” Agents can even record as you work and learn from that.</p><p>As you use a skill, the agent can keep learning and refining it. Some do this automatically; others need a nudge. Below are cut-down examples of two skills I’ve used to generate podcasts and kick off RL runs.</p><details class="fold"><summary>SKILL.md – Daily AI podcasts with NotebookLM</summary><p>name: ai-podcasts<br>description: &gt;-<br>Create 3 daily NotebookLM AI podcasts from ResearchAudio, AI Timeline and HuggingFace.<br>---<br><br># Daily NotebookLM podcasts<br>Create up to 3 daily NotebookLM podcasts.</p><p><br>## Settings<br>- **Deep Dive · Medium**<br>- Focus prompt:<br>`Never use analogies. Finish with a short adversarial overview.`<br>- Names:<br>- `mmmDD|ra|2day`<br>- `mmmDD|ait|&lt;title&gt;`<br>- `mmmDD|hf|&lt;title&gt;`<br><br>## Daily slots<br>1. **ResearchAudio**<br>- Combine articles from the newest 2 days.<br>2. **AI Timeline**<br>- Pick the newest undone paper from the scrape sheet.<br>3. **HuggingFace**<br>- Check the top 5 papers. Pick the highest-upvoted undone paper.<br><br>## Steps<br>1. **Check AI Timeline supply**<br>- Read `AI Timeline Scrape`.<br>- Refill from the latest weekly roundup, preserve existing rows.<br>2. **Gather candidates**<br>- Get ResearchAudio posts every other from the newest 2 days.<br>- Get the newest undone AI Timeline paper.<br>- Get one of the top 5 HuggingFace papers.<br>3. **Check NotebookLM login**<br>- Open NotebookLM.<br>- Ask the user to sign in if required.<br>4. **Deduplicate**<br>- Read existing notebook names.<br>- Skip candidates with a matching `mmmDD|&lt;tag&gt;|` notebook.<br>5. **Generate**<br>- Create each notebook sequentially.<br>- Add the source URLs.<br>- Set the notebook name.<br>- Generate **Deep Dive · Medium** with the fixed focus prompt.<br>6. **Respect quota**<br>- Stop at the daily audio-limit banner.<br>- Do not upgrade the plan.<br>- Mark remaining notebooks as deferred.<br><br>## Rules<br>...<br></p></details><details class="fold"><summary>SKILL.md – Minimal RL GRPO verl run (vast.ai)</summary><pre>name: verl-vastai
+description: Spin up a verl RL training run on a Vast.ai GPU box.<br>Use when the user wants to launch a RL GRPO run.
+---
+
+# Run verl on Vast.ai
+The environment (verl + SGLang 0.5.12, Qwen3.5) is **baked into a <br>template. The image also ships a **dataset pool from HuggingFace**.
+
+Helpers live in `~/projects/rl_training/vastai/` <br>(on `$PATH` as `vf`, `vc`, `vl`, `vs`).
+
+## Workflow<br>
+1. **Find a GPU** — `vf`
+   Lists H100 offers (≥80GB VRAM, ≥160GB RAM, ≥190GB disk),
+   sorted by ROI (DLperf per $). Pick the cheapest **ID**.
+
+2. **Launch + sync** — `vc &lt;offer-id&gt;`
+   Creates the instance from `verl-sgl0512`, polls until `running`,<br>   then rsyncs the current directory up.
+
+3. **Train** — `ssh` in (tmux is configured) and start the run:<br>```<br>python -m verl.trainer.main_ppo algorithm.adv_estimator=grpo ... \<br>   2&gt;&amp;1 | tee /root/run.log<br>```<br><br>4. **Watch** – always, after kicking off a run:<br>   Pool `/root/run.log` every 10 minutes with `/loop`, until done.<br>   - Log every issue, diagnose it, and try to fix:<br>   data formats, broken rewards, CUDA OOMs, Ray errors, NaNs, ...<br>   Restarts ONLY when the run is broken or clearly stalled.<br>   ...<br>   When the task is done, or blocked after exhausting fixes, <br>   call PushNotification to alert my phone.<br>
+Re-sync code anytime with `vs &lt;ssh-url&gt;`.
+
+## Rules &amp; gotchas
+
+...<br>
+## Stop the box
+
+`vastai destroy instance &lt;id&gt;` when done — it bills by the second.
+</pre></details><h2 style="font-family: &quot;Iowan Old Style BT&quot;, &quot;Iowan Old Style&quot;, &quot;Palatino Linotype&quot;, Palatino, Georgia, serif;"><p style="font-weight: 400;">Our next leap in productivity requires multiple shifts: short → long-horizon tasks. Babysitting agents → automated adversarial flows. Triggering flows → unblocking pipelines. 8h → 24h production.</p></h2><h2>The Looper <span class="speed">~10× output</span></h2>
+    <p>Developers are familiar with loops and scheduled tasks, and for AI, this became popular in 2025 with "Ralph Wiggum" loops.&nbsp;</p><p>There are goal-based loops like <code>/goal</code>&nbsp;that execute and adapt a plan until a goal or criterion is met. Each loop can use a simple check, self-review, another agent’s adversarial review, or even ensemble voting. The plan may change as it runs, but the goal stays fixed – useful for long-running tasks – think hours or days – or work that requires repeated trial and error.</p><p><img src="../assets/blog/four-stages-agentic-coding/img-07c2d93f.png" alt="" class=""></p><blockquote><span style="letter-spacing: 0.255px;">/goal Upgrade all project </span><span style="letter-spacing: 0.255px;">dependencies until CI passes without warnings.<br></span><span style="letter-spacing: 0.255px;"><br>/goal </span><span style="letter-spacing: 0.255px;">Cut API p90 latency by 50%. Benchmark every change and plot measured wins.<br></span><br><span style="letter-spacing: 0.255px;">/goal Stress-test foobar, fix any failure you uncover,&nbsp;</span><span style="letter-spacing: 0.255px;">and add regression coverage.</span><br><br>/goal Tune my VERL config for a sub-30-hour run. Identify and test its highest-value ablations, including hybrid versus fully async. Use short parallel experiments on clusters A and B. Log results in a .md file<span style="letter-spacing: 0.015em;">, verify the best configuration, and estimate its full runtime.&nbsp;</span><span style="letter-spacing: 0.015em;">Have another agent challenge experiment results.</span></blockquote><p>There are also scheduled or event-based loops <code>/loop</code>&nbsp;that execute every minute, hour, or day, or when an event happens. They may or may not have criteria for canceling future runs.</p><p><img src="../assets/blog/four-stages-agentic-coding/img-9c9cdd5f.png" alt="" class=""></p><blockquote><span style="letter-spacing: 0.255px;">/loop 15m Inspect my [app|api|container] health metrics and error logs. If you identify a recurring or blocking issue, find its root cause, </span>verify a fix, and open a hotfix PR.<br><br><span style="letter-spacing: 0.255px;">/loop 8h Eval the latest model checkpoint.</span><br><span style="letter-spacing: 0.255px;">/loop 30m Check that my evals are still progressing and their rewards are not stuck at zero.</span><br></blockquote><p>Agents don't sleep, so neither can your machine. Codex and Claude can keep it awake while they work; Amphetamine does the job too.</p><p>With loops, every PR becomes a goal: rebase, resolve conflicts, gather agent feedback, apply fixes, run tests, then push. New features become loops with a plan, or set of focus areas. So does everything else: migrating dependencies, finding and fixing bugs, profiling code, analyzing results, and making releases.</p><p>In my setup, I run a mix of <b>background loops&nbsp;</b>that ping my phone when something needs my attention and a handful of&nbsp;<b>foreground loops</b>&nbsp;I steer more frequently. Loops were how I first got my agents to work through&nbsp;<b>1~2B tokens/day</b>. In the next post, I’ll cover workflows and LMPs that have a very wide inverted funnel, turning a little prompting into far more output – scaling agents to <b>100B+ tokens/day</b>.&nbsp;</p>
+    <a class="back" href="../blog.html">← Back to blog</a>
+  </article>
+</main>
+
+<footer class="foot">
+  <div class="wrap">© 2026 Bruno Evangelista · <a href="https://www.linkedin.com/in/brunoevangelista/">LinkedIn</a> · <a href="https://github.com/bpevangelista">GitHub</a> · <a href="https://x.com/bpevangelista">X</a> · <span style="opacity:.8">Views and opinions are my own.</span></div>
+</footer>
+</body>
+</html>
