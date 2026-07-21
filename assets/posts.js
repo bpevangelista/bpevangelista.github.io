@@ -5,7 +5,7 @@ window.POSTS = [
     title: '10× Your Coding & Research by Orchestrating Agentic Workflows',
     date: '19 Jul 2026',
     iso: '2026-07-19',
-    excerpt: 'Amazon rebuilt Bedrock, an estimated one-year job for 40 engineers – done in 76 days. And Bun went from Zig to Rust in 11 days. What made both possible? Agentic "workflows" and "loops"',
+    excerpt: 'Amazon rebuilt Bedrock, an estimated one-year job for 40 engineers – done in 76 days. And Bun went from Zig to Rust in 11 days. What made both possible? Agentic "workflows" and "loops".',
     published: true
   },
   {
